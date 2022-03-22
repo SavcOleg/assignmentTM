@@ -1,0 +1,16 @@
+For each department find:
+a. The top earning employee
+SELECT * FROM Employees e 
+where salary = (SELECT MAX(SALARY) FROM Employees e )
+
+b. His salary
+SELECT MAX(SALARY) FROM Employees e 
+
+c. Salary difference between The top and the second earning employees.
+SELECT MAX(e.salary) - (SELECT MAX(salary) FROM Employees WHERE  salary < (SELECT MAX(SALARY) FROM Employees e )) sal_diff
+FROM Employees e
+2. Calculate the percent of employees working in the company for more than 3 years.
+SELECT (COUNT(*) / (SELECT COUNT(*) from Employees e))*100 
+FROM Employees e
+where hire_date >= NOW() - INTERVAL 3 YEAR 
+
